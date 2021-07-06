@@ -78,6 +78,8 @@ public class TCPTransport: Transport {
         }
         let parameters = NWParameters(tls: tlsOptions, tcp: options)
         let conn = NWConnection(host: NWEndpoint.Host.name(parts.host, nil), port: NWEndpoint.Port(rawValue: UInt16(parts.port))!, using: parameters)
+    
+        connection?.cancel()//释放资源
         connection = conn
         start()
     }
